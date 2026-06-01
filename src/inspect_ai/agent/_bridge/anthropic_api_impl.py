@@ -437,8 +437,13 @@ async def messages_from_anthropic_input(
                 flush_pending_user_content()
 
         elif param["role"] == "system":
+            # Mid-conversation ``role: "system"`` (sent by claude-agent-acp
+            # for 4.8+/unknown models) is a ``<system-reminder>``-style
+            # injection. Render as a user turn so providers that reject
+            # inline system roles (e.g. mythos-preview) accept it; this is
+            # also what claude-agent-acp itself does for pre-4.8 models.
             messages.append(
-                ChatMessageSystem(content=anthropic_system_to_text(param["content"]))
+                ChatMessageUser(content=anthropic_system_to_text(param["content"]))
             )
 
         else:
