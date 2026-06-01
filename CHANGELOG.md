@@ -1,6 +1,6 @@
 ## Unreleased
 
-- Agent Bridge: Accept inline `role: "system"` messages from bridged Anthropic-API clients (Claude 4.8+ mid-conversation system messages).
+- Model: Propagate task-level `GenerateConfig.cache` to role models and ad-hoc `get_model()` calls (previously only the active/primary model inherited it).
 
 ## 0.3.232 (31 May 2026)
 
